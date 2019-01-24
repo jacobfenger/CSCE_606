@@ -66,22 +66,89 @@ def hello(name)
 end
 
 def starts_with_consonant? s
-	if s.match(/\A[^aeiouAEIOU]/)
-		return true 
+	# If it's a letter it's either a consonant or a vowel
+	if s.match(/\A[a-zA-Z]/) 
+		if s.match(/\A[^aeiouAEIOU]/) # Check for no vowels
+			return true 
+		end
+		return false
 	elsif s.length == 0
-		return true
+		return false
 	else 
 		return false
 	end
 	false
 end
 
+# A multiple of 4 in binary is any number that ends with 00 due 
+# to it being base 2.
+#
+# We can simply check if the string only contains 1s and 0s and 
+# ends with two 0s.
 def binary_multiple_of_4? s
-  # YOUR CODE HERE
+
+	# Check if a string does not have a 0 or 1
+	if s.match(/^[01]*[00]$/) # 00 must be at the end
+		return true
+	elsif s.match(/^0+$/) # If a string is only 0s, return true
+		return true
+	end
+	false
 end
 
 # Part 3
 
 class BookInStock
-# YOUR CODE HERE
+	def initialize(isbn, price)
+		if isbn.length == 0
+			raise ArgumentError
+		end
+
+		if price <= 0
+			raise ArgumentError
+		end
+
+		@isbn = isbn
+		@price = price
+	end
+
+	# Define class var ISBN
+	def isbn
+		@isbn
+	end
+
+	# Define setter for isbn
+	def isbn=(isbn)
+		@isbn = isbn
+	end
+
+	# Define class var for price
+	def price
+		@price
+	end
+
+	# Setter for price
+	def price=(price)
+		@price = price
+	end
+
+	def price_as_string()
+		# Split the price into dollars and cents strings
+		split_price = @price.to_s.split('.')
+		dollars = split_price[0]
+		cents = split_price[1]
+
+		# If cents is nil, that means there is no cents defined.
+		# We can convert the cents string into 2 zeros
+		if cents == nil
+			cents = "00"
+		# If cents is length 1, that mean we can just append a 0
+		elsif cents.length == 1 
+			cents = cents + "0"
+		end
+
+		# Construct the price_as_string var with the appended dollar sign
+		# and the newly formatted cents string
+		price_as_string = "$" + dollars + "." + cents
+	end
 end

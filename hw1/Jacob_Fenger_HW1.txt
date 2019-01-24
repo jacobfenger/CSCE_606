@@ -1,0 +1,5 @@
+jacob@DESKTOP-89TAS1E:/mnt/c/Projects/CSCE_606/hw1$ rspec
+..................................
+
+Finished in 0.01353 seconds (files took 0.06864 seconds to load)
+34 examples, 0 failures
